@@ -150,6 +150,17 @@ namespace UnityBridgeIntegration
             //{
             //    BrowseForFolder();
             //}
+            if (GUILayout.Button("Export Tags", GUILayout.MaxWidth(175f)))
+            {
+                Debug.LogError("Export Tags Need to Implement.");
+            }
+
+            if (GUILayout.Button("Import Tags", GUILayout.MaxWidth(175f)))
+            {
+                Debug.LogError("Import Tags Need to Implement.");
+            }
+
+
             if (GUILayout.Button("Insert Namespace", GUILayout.MaxWidth(175f)))
             {
                 csharpNamespaceInserter.insertNamespaceInAllFile();

@@ -21,14 +21,26 @@ namespace UnityBridgeIntegration
         {
             Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
             GameObject _bridgeGo = findUnityBridgeReieverGo();
-            _bridgeGo.BroadcastMessage("GameToUnityBridge_updateScore", score, SendMessageOptions.DontRequireReceiver);
+            if (_bridgeGo != null)
+            {
+                _bridgeGo.BroadcastMessage("GameToUnityBridge_updateScore", score, SendMessageOptions.DontRequireReceiver);
+            } else
+            {
+                Debug.LogError("game object UnityBridgeManager could not be found");
+            }
         }
 
         public static void Broadcast_exitGame()
         {
             Debug.Log("Broadcast_exitGame: ");
             GameObject _bridgeGo = findUnityBridgeReieverGo();
-            _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGame", SendMessageOptions.DontRequireReceiver);
+            if (_bridgeGo != null)
+            {
+                _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGame", SendMessageOptions.DontRequireReceiver);
+            } else
+            {
+                Debug.LogError("game object UnityBridgeManager could not be found");
+            }
         }
     }
 
