@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Unity.AssetBundleBrowser.Editor.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Unity.UnityBridgeIntegration.Editor.Tests")]
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
 
     public class AssetBundleBrowserMain : EditorWindow, IHasCustomMenu, ISerializationCallbackReceiver
@@ -25,9 +25,9 @@ namespace AssetBundleBrowser
 
         enum Mode
         {
+            Inspect,
             Browser,
             Builder,
-            Inspect,
         }
         [SerializeField]
         Mode m_Mode;
@@ -49,11 +49,11 @@ namespace AssetBundleBrowser
         const float k_ToolbarPadding = 15;
         const float k_MenubarPadding = 32;
 
-        [MenuItem("Window/AssetBundle Browser", priority = 2050)]
+        [MenuItem("Window/Unity Bridge Integration Tool", priority = 2050)]
         static void ShowWindow()
         {
             s_instance = null;
-            instance.titleContent = new GUIContent("AssetBundles");
+            instance.titleContent = new GUIContent("UnityBridge");
             instance.Show();
         }
 
@@ -188,7 +188,8 @@ namespace AssetBundleBrowser
 
             float toolbarWidth = position.width - k_ToolbarPadding * 4 - m_RefreshTexture.width;
             //string[] labels = new string[2] { "Configure", "Build"};
-            string[] labels = new string[3] { "Configure", "Build", "Inspect" };
+            //string[] labels = new string[3] { "Configure", "Build", "RefactorCode" };
+            string[] labels = new string[1] {  "RefactorCode" };
             m_Mode = (Mode)GUILayout.Toolbar((int)m_Mode, labels, "LargeButton", GUILayout.Width(toolbarWidth) );
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();

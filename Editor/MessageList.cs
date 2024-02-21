@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     internal class MessageList
     {

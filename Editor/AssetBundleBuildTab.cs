@@ -1,12 +1,12 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-using AssetBundleBrowser.AssetBundleDataSource;
+using UnityBridgeIntegration.AssetBundleDataSource;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     [System.Serializable]
     internal class AssetBundleBuildTab

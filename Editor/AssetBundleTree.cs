@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     internal class AssetBundleTree : TreeView
     { 

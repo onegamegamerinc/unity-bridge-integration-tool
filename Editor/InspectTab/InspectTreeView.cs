@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor.IMGUI.Controls;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
 	internal class InspectTreeItem : TreeViewItem
 	{

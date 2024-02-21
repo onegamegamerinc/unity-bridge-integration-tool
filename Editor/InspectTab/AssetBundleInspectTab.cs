@@ -1,4 +1,4 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEditor.IMGUI.Controls;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     [System.Serializable]
     internal class AssetBundleInspectTab
@@ -25,6 +25,9 @@ namespace AssetBundleBrowser
         internal Editor m_Editor = null;
 
         private SingleBundleInspector m_SingleInspector;
+
+        private CsharpNamespaceInserter csharpNamespaceInserter;
+        private ScriptMoverForBridgeIntegration scriptMoverForBridgeIntegration;
 
         /// <summary>
         /// Collection of loaded asset bundle records indexed by bundle name
@@ -55,6 +58,14 @@ namespace AssetBundleBrowser
         {
             m_BundleList = new Dictionary<string, List<string>>();
             m_SingleInspector = new SingleBundleInspector();
+            csharpNamespaceInserter = new CsharpNamespaceInserter(
+                //"/Users/msudhanshu/Tech/Comp/onegame/frontend/onegame-mobile/unity/unity-bridge/Assets/Unity-bridge-integration-tool/Tests/Dummyfile.cs",
+                "Assets/Unity-bridge-integration-tool/Tests",
+               
+                "MyHelixGame");
+            scriptMoverForBridgeIntegration = new ScriptMoverForBridgeIntegration(
+                "Assets/Unity-bridge-integration-tool/Tests",
+                "MyHelixGame");
             m_loadedAssetBundles = new Dictionary<string, AssetBundleRecord>();
         }
 
@@ -131,14 +142,23 @@ namespace AssetBundleBrowser
             EditorGUILayout.Space();
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Add File", GUILayout.MaxWidth(75f)))
+            //if (GUILayout.Button("Add File", GUILayout.MaxWidth(75f)))
+            //{
+            //    BrowseForFile();
+            //}
+            //if (GUILayout.Button("Add Folder", GUILayout.MaxWidth(75f)))
+            //{
+            //    BrowseForFolder();
+            //}
+            if (GUILayout.Button("Insert Namespace", GUILayout.MaxWidth(175f)))
             {
-                BrowseForFile();
+                csharpNamespaceInserter.insertNamespaceInAllFile();
             }
-            if (GUILayout.Button("Add Folder", GUILayout.MaxWidth(75f)))
+            if (GUILayout.Button("Move Scripts", GUILayout.MaxWidth(175f)))
             {
-                BrowseForFolder();
+                scriptMoverForBridgeIntegration.moveAllFiles();
             }
+            
 
             GUILayout.EndHorizontal();
             EditorGUILayout.Space();

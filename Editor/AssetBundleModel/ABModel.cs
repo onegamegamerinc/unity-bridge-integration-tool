@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.IMGUI.Controls;
 
-using AssetBundleBrowser.AssetBundleDataSource;
+using UnityBridgeIntegration.AssetBundleDataSource;
 
-namespace AssetBundleBrowser.AssetBundleModel
+namespace UnityBridgeIntegration.AssetBundleModel
 {
     /// <summary>
     /// Static class holding model data for Asset Bundle Browser tool. Data in Model is read from DataSource, but is not pushed.  

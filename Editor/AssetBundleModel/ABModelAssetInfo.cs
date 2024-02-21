@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.IMGUI.Controls;
 
-namespace AssetBundleBrowser.AssetBundleModel
+namespace UnityBridgeIntegration.AssetBundleModel
 {
     internal sealed class AssetTreeItem : TreeViewItem
     {

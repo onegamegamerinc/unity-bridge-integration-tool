@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.IMGUI.Controls;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     internal class MessageSystem
     {

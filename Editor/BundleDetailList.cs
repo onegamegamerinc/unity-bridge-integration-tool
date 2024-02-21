@@ -1,10 +1,10 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using AssetBundleBrowser.AssetBundleModel;
+using UnityBridgeIntegration.AssetBundleModel;
 using UnityEditor.IMGUI.Controls;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     internal class BundleDetailItem : TreeViewItem
     {

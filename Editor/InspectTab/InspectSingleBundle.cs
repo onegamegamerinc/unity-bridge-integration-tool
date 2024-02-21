@@ -1,8 +1,8 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using System.IO;
 
-namespace AssetBundleBrowser
+namespace UnityBridgeIntegration
 {
     class SingleBundleInspector
     {
