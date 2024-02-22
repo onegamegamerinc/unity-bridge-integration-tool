@@ -63,6 +63,32 @@ namespace UnityBridgeIntegration
                 Debug.LogError("game object UnityBridgeManager could not be found");
             }
         }
+
+        public static void Broadcast_showFullScreenAd()
+        {
+            Debug.Log("Broadcast_exitGame: ");
+            GameObject _bridgeGo = findUnityBridgeReieverGo();
+            if (_bridgeGo != null)
+            {
+                _bridgeGo.BroadcastMessage("GameToUnityBridge_showFullScreenAd", SendMessageOptions.DontRequireReceiver);
+            } else
+            {
+                Debug.LogError("game object UnityBridgeManager could not be found");
+            }
+        }
+
+        public static void Broadcast_showBannerAd(string param)
+        {
+            Debug.Log("Broadcast_exitGame: ");
+            GameObject _bridgeGo = findUnityBridgeReieverGo();
+            if (_bridgeGo != null)
+            {
+                _bridgeGo.BroadcastMessage("GameToUnityBridge_showBannerAd",param, SendMessageOptions.DontRequireReceiver);
+            } else
+            {
+                Debug.LogError("game object UnityBridgeManager could not be found");
+            }
+        }
     }
 
 }
