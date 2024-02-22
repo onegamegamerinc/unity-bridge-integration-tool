@@ -37,7 +37,7 @@ namespace UnityBridgeIntegration
 
         public void insertNamespaceInAllFile(string filePath, string gameNamespaceName)
         {
-            Debug.Log("Inserting namepaces in folder path : " + path);
+            Debug.Log("Inserting namepaces in folder path : " + filePath);
 
             //DirectoryInfo dir = new DirectoryInfo(path); //"Assets/Resources/Vehicles"
             //FileInfo[] info = dir.GetFiles("*.cs");
@@ -47,7 +47,7 @@ namespace UnityBridgeIntegration
             //}
 
 
-            var files = Directory.GetFiles(path, "*.cs", SearchOption.AllDirectories);
+            var files = Directory.GetFiles(filePath, "*.cs", SearchOption.AllDirectories);
             foreach (var f in files)
             {
                 insertNamespaceInFile(f, gameNamespaceName);
