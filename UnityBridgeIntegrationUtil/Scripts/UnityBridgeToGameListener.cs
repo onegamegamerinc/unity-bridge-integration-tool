@@ -26,15 +26,17 @@ namespace UnityBridgeIntegration
      */
 
 
-    public class UnityBridgeToGameListener
+    public class UnityBridgeToGameListener //: MonoBehaviour
     {
-        // public static UnityBridgeToGameListener Instance { get; private set; }
-        // private void Awake()
-        // {
-        //     Instance = this;
-        // }
+        //public static UnityBridgeToGameListener Instance { get; private set; }
+        //private void Awake()
+        //{
+        //    Instance = this;
+        //}
 
-       public static event Action<ScoreResToUnityDto> GotScoreResponse;
+        public static event Action<ScoreResToUnityDto> GotScoreResponse;
+        public static event Action PlayAgainAction;
+        public static event Action<int> EnableSoundAction;
 
         public static void UnityBridgeToGame_OnScoreUpdateResponse(string payload)
         {
@@ -42,6 +44,20 @@ namespace UnityBridgeIntegration
             ScoreResToUnityDto scoreResToUnityDto = ScoreResToUnityDto.ParsePayload(payload);
             GotScoreResponse?.Invoke(scoreResToUnityDto);
         }
+
+        public static void UnityBridgeToGame_playAgain()
+        {
+            Debug.Log("UnityBridgeToGame_playAgain: recieved ");
+            PlayAgainAction?.Invoke();
+        }
+
+        public static void UnityBridgeToGame_enableSound(int enable)
+        {
+            Debug.Log("UnityBridgeToGame_enableSound: recieved ");
+            EnableSoundAction?.Invoke(enable);
+        }
+
+
     }
 
 }
