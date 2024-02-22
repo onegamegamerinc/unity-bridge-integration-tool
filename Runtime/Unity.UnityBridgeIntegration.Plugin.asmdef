@@ -4,7 +4,7 @@
     ],
     "includePlatforms": [
         "Android",
-        "Io",
+        "Ios",
         "Editor"
     ],
     "excludePlatforms": []

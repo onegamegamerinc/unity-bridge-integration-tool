@@ -1,5 +1,4 @@
 using UnityEngine;
-using FlutterUnityIntegration;
 using System;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Unity.UnityBridgeIntegration.Plugin")]
