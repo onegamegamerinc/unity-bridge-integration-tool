@@ -32,17 +32,20 @@ namespace UnityBridgeIntegration
         [SerializeField]
         Mode m_Mode;
 
-        [SerializeField]
-        int m_DataSourceIndex;
+        //[SerializeField]
+        //int m_DataSourceIndex;
+
+        //[SerializeField]
+        //internal AssetBundleManageTab m_ManageTab;
+
+        //[SerializeField]
+        //internal AssetBundleBuildTab m_BuildTab;
+
+        //[SerializeField]
+        //internal AssetBundleInspectTab m_InspectTab;
 
         [SerializeField]
-        internal AssetBundleManageTab m_ManageTab;
-
-        [SerializeField]
-        internal AssetBundleBuildTab m_BuildTab;
-
-        [SerializeField]
-        internal AssetBundleInspectTab m_InspectTab;
+        internal UnityBridgeMainTab m_unityBridgeMainTab;
 
         private Texture2D m_RefreshTexture;
 
@@ -59,7 +62,7 @@ namespace UnityBridgeIntegration
 
         [SerializeField]
         internal bool multiDataSource = false;
-        List<AssetBundleDataSource.ABDataSource> m_DataSourceList = null;
+        //List<AssetBundleDataSource.ABDataSource> m_DataSourceList = null;
         public virtual void AddItemsToMenu(GenericMenu menu)
         {
             if(menu != null)
@@ -74,15 +77,16 @@ namespace UnityBridgeIntegration
         {
 
             Rect subPos = GetSubWindowArea();
-            if(m_ManageTab == null)
-                m_ManageTab = new AssetBundleManageTab();
-            m_ManageTab.OnEnable(subPos, this);
-            if(m_BuildTab == null)
-                m_BuildTab = new AssetBundleBuildTab();
-            m_BuildTab.OnEnable(this);
-            if (m_InspectTab == null)
-                m_InspectTab = new AssetBundleInspectTab();
-            m_InspectTab.OnEnable(subPos);
+            //if(m_ManageTab == null)
+            //    m_ManageTab = new AssetBundleManageTab();
+            //m_ManageTab.OnEnable(subPos, this);
+            //if(m_BuildTab == null)
+            //    m_BuildTab = new AssetBundleBuildTab();
+            //m_BuildTab.OnEnable(this);
+
+            if (m_unityBridgeMainTab == null)
+                m_unityBridgeMainTab = new UnityBridgeMainTab();
+            m_unityBridgeMainTab.OnEnable(subPos);
 
             m_RefreshTexture = EditorGUIUtility.FindTexture("Refresh");
 
@@ -92,26 +96,26 @@ namespace UnityBridgeIntegration
         {
             //determine if we are "multi source" or not...
             multiDataSource = false;
-            m_DataSourceList = new List<AssetBundleDataSource.ABDataSource>();
-            foreach (var info in AssetBundleDataSource.ABDataSourceProviderUtility.CustomABDataSourceTypes)
-            {
-                m_DataSourceList.AddRange(info.GetMethod("CreateDataSources").Invoke(null, null) as List<AssetBundleDataSource.ABDataSource>);
-            }
+          //  m_DataSourceList = new List<AssetBundleDataSource.ABDataSource>();
+            //foreach (var info in AssetBundleDataSource.ABDataSourceProviderUtility.CustomABDataSourceTypes)
+            //{
+            //    m_DataSourceList.AddRange(info.GetMethod("CreateDataSources").Invoke(null, null) as List<AssetBundleDataSource.ABDataSource>);
+            //}
              
-            if (m_DataSourceList.Count > 1)
-            {
-                multiDataSource = true;
-                if (m_DataSourceIndex >= m_DataSourceList.Count)
-                    m_DataSourceIndex = 0;
-                AssetBundleModel.Model.DataSource = m_DataSourceList[m_DataSourceIndex];
-            }
+            //if (m_DataSourceList.Count > 1)
+            //{
+            //    multiDataSource = true;
+            //    if (m_DataSourceIndex >= m_DataSourceList.Count)
+            //        m_DataSourceIndex = 0;
+            //    AssetBundleModel.Model.DataSource = m_DataSourceList[m_DataSourceIndex];
+            //}
         }
         private void OnDisable()
         {
-            if (m_BuildTab != null)
-                m_BuildTab.OnDisable();
-            if (m_InspectTab != null)
-                m_InspectTab.OnDisable();
+            //if (m_BuildTab != null)
+            //    m_BuildTab.OnDisable();
+            if (m_unityBridgeMainTab != null)
+                m_unityBridgeMainTab.OnDisable();
         }
 
         public void OnBeforeSerialize()
@@ -140,7 +144,7 @@ namespace UnityBridgeIntegration
                     break;
                 case Mode.Browser:
                 default:
-                    m_ManageTab.Update();
+                   // m_ManageTab.Update();
                     break;
             }
         }
@@ -152,14 +156,14 @@ namespace UnityBridgeIntegration
             switch(m_Mode)
             {
                 case Mode.Builder:
-                    m_BuildTab.OnGUI();
+                   // m_BuildTab.OnGUI();
                     break;
                 case Mode.Inspect:
-                    m_InspectTab.OnGUI(GetSubWindowArea());
+                    m_unityBridgeMainTab.OnGUI(GetSubWindowArea());
                     break;
                 case Mode.Browser:
                 default:
-                    m_ManageTab.OnGUI(GetSubWindowArea());
+                   // m_ManageTab.OnGUI(GetSubWindowArea());
                     break;
             }
         }
@@ -173,8 +177,8 @@ namespace UnityBridgeIntegration
             {
                 case Mode.Browser:
                     clicked = GUILayout.Button(m_RefreshTexture);
-                    if (clicked)
-                        m_ManageTab.ForceReloadData();
+                    //if (clicked)
+                    //    m_ManageTab.ForceReloadData();
                     break;
                 case Mode.Builder:
                     GUILayout.Space(m_RefreshTexture.width + k_ToolbarPadding);
@@ -182,7 +186,7 @@ namespace UnityBridgeIntegration
                 case Mode.Inspect:
                     clicked = GUILayout.Button(m_RefreshTexture);
                     if (clicked)
-                        m_InspectTab.RefreshBundles();
+                        m_unityBridgeMainTab.RefreshBundles();
                     break;
             }
 
@@ -202,44 +206,44 @@ namespace UnityBridgeIntegration
                 {
                     GUILayout.Label("Bundle Data Source:");
                     GUILayout.FlexibleSpace();
-                    var c = new GUIContent(string.Format("{0} ({1})", AssetBundleModel.Model.DataSource.Name, AssetBundleModel.Model.DataSource.ProviderName), "Select Asset Bundle Set");
-                    if (GUILayout.Button(c , EditorStyles.toolbarPopup) )
+                  //  var c = new GUIContent(string.Format("{0} ({1})", AssetBundleModel.Model.DataSource.Name, AssetBundleModel.Model.DataSource.ProviderName), "Select Asset Bundle Set");
+               //     if (GUILayout.Button(c , EditorStyles.toolbarPopup) )
                     {
                         GenericMenu menu = new GenericMenu();
 
-                        for (int index = 0; index < m_DataSourceList.Count; index++)
-                        {
-                            var ds = m_DataSourceList[index];
-                            if (ds == null)
-                                continue;
+                        //for (int index = 0; index < m_DataSourceList.Count; index++)
+                        //{
+                        //    var ds = m_DataSourceList[index];
+                        //    if (ds == null)
+                        //        continue;
 
-                            if (index > 0)
-                                menu.AddSeparator("");
+                        //    if (index > 0)
+                        //        menu.AddSeparator("");
                              
-                            var counter = index;
-                            menu.AddItem(new GUIContent(string.Format("{0} ({1})", ds.Name, ds.ProviderName)), false,
-                                () =>
-                                {
-                                    m_DataSourceIndex = counter;
-                                    var thisDataSource = ds;
-                                    AssetBundleModel.Model.DataSource = thisDataSource;
-                                    m_ManageTab.ForceReloadData();
-                                }
-                            );
+                        //    var counter = index;
+                        //    menu.AddItem(new GUIContent(string.Format("{0} ({1})", ds.Name, ds.ProviderName)), false,
+                        //        () =>
+                        //        {
+                        //            //m_DataSourceIndex = counter;
+                        //            //var thisDataSource = ds;
+                        //            //AssetBundleModel.Model.DataSource = thisDataSource;
+                        //            //m_ManageTab.ForceReloadData();
+                        //        }
+                        //    );
 
-                        }
+                        //}
 
                         menu.ShowAsContext();
                     }
 
                     GUILayout.FlexibleSpace();
-                    if (AssetBundleModel.Model.DataSource.IsReadOnly())
-                    {
-                        GUIStyle tbLabel = new GUIStyle(EditorStyles.toolbar);
-                        tbLabel.alignment = TextAnchor.MiddleRight;
+                    //if (AssetBundleModel.Model.DataSource.IsReadOnly())
+                    //{
+                    //    GUIStyle tbLabel = new GUIStyle(EditorStyles.toolbar);
+                    //    tbLabel.alignment = TextAnchor.MiddleRight;
 
-                        GUILayout.Label("Read Only", tbLabel);
-                    }
+                    //    GUILayout.Label("Read Only", tbLabel);
+                    //}
                 }
 
                 GUILayout.EndHorizontal();
