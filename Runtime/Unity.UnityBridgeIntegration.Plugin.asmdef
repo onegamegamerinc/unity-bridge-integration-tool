@@ -1,0 +1,11 @@
+{
+    "name": "Unity.UnityBridgeIntegration.Plugin",
+    "references": [
+    ],
+    "includePlatforms": [
+        "Android",
+        "Io",
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

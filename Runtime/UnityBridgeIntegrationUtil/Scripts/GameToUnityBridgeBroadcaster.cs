@@ -1,6 +1,8 @@
 using UnityEngine;
 using FlutterUnityIntegration;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Unity.UnityBridgeIntegration.Plugin")]
+
 namespace UnityBridgeIntegration
 {
 
