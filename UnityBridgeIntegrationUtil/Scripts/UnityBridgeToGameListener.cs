@@ -26,17 +26,17 @@ namespace UnityBridgeIntegration
      */
 
 
-    public class UnityBridgeToGameListener : MonoBehaviour
+    public class UnityBridgeToGameListener
     {
-        public static UnityBridgeToGameListener Instance { get; private set; }
-        public static event Action<ScoreResToUnityDto> GotScoreResponse;
+        // public static UnityBridgeToGameListener Instance { get; private set; }
+        // private void Awake()
+        // {
+        //     Instance = this;
+        // }
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+       public static event Action<ScoreResToUnityDto> GotScoreResponse;
 
-        public void UnityBridgeToGame_OnScoreUpdateResponse(string payload)
+        public static void UnityBridgeToGame_OnScoreUpdateResponse(string payload)
         {
             Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: recieved " + payload);
             ScoreResToUnityDto scoreResToUnityDto = ScoreResToUnityDto.ParsePayload(payload);
