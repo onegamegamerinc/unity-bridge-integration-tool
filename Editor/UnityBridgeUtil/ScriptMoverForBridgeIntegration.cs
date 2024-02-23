@@ -33,42 +33,54 @@ namespace UnityBridgeIntegration
             moveAllFiles(path, gameNamespaceName);
         }
 
-        public void moveAllFiles(string filePath, string gameNamespaceName)
+        public void moveAllFiles(string path, string gameNamespaceName)
         {
-            Debug.Log("Inserting namepaces in folder path : " + path);
-
-            //DirectoryInfo dir = new DirectoryInfo(path); //"Assets/Resources/Vehicles"
-            //FileInfo[] info = dir.GetFiles("*.cs");
-            //foreach (FileInfo f in info)
-            //{
-            //    insertNamespaceInFile(f.FullName, gameNamespaceName);
-            //}
-
-
-            var files = Directory.GetFiles(path, "*.cs", SearchOption.AllDirectories);
-            foreach (var f in files)
+            Debug.Log("moveAllFiless in folder path : " + path);
+            Debug.Log("Please Move the listed file manualy by dragging.");
+            try
             {
-                moveFile(f, gameNamespaceName);
+                //DirectoryInfo dir = new DirectoryInfo(path); //"Assets/Resources/Vehicles"
+                //FileInfo[] info = dir.GetFiles("*.cs");
+                //foreach (FileInfo f in info)
+                //{
+                //    insertNamespaceInFile(f.FullName, gameNamespaceName);
+                //}
+
+                EditorApplication.LockReloadAssemblies();
+                var files = Directory.GetFiles(path, "*.cs", SearchOption.AllDirectories);
+                foreach (var f in files)
+                {
+                    moveFile(path, f, gameNamespaceName);
+                }
+            } catch(Exception e)
+            {
+
             }
+            EditorApplication.UnlockReloadAssemblies();
+            AssetDatabase.Refresh();
+            EditorUtility.RequestScriptReload();
 
         }
 
 
-        public void moveFile(string filePath, string gameNamespaceName)
+        public void moveFile(string path, string filePath, string gameNamespaceName)
         {
             string filePathNameOnly = filePath.Replace(path + "/", "");
-            Debug.Log("Moving from " + filePath + " to " + "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
+            Debug.Log("Move from " + filePath + " to " + "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
 
             var filePathOnly = Path.GetDirectoryName(filePathNameOnly);// filePathNameOnly.Split("/");
             Directory.CreateDirectory("Assets/GameScript/" + gameNamespaceName + "/" + filePathOnly);
-            File.Move(filePath, "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
+
+
+
+            //File.Move(filePath, "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
             //File.Move(filePath, "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly + ".meta");
 
             //FileUtil.CopyFileOrDirectory(filePath, "Assets/GameScript/"+ gameNamespaceName + "/" + filePath);
             //FileUtil.CopyFileOrDirectory(parrentPath, "Assets/GameScript/" + gameNamespaceName);
             //FileUtil.MoveFileOrDirectory(filePath, "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
 
-            AssetDatabase.Refresh();
+
         }
 
     }

@@ -7,16 +7,16 @@ using UnityEngine;
 namespace UnityBridgeIntegration
 {
 
-    public class AssetBundleBrowserMain : EditorWindow, IHasCustomMenu, ISerializationCallbackReceiver
+    public class UnityBridgeIntegrationMain : EditorWindow, IHasCustomMenu, ISerializationCallbackReceiver
     {
 
-        private static AssetBundleBrowserMain s_instance = null;
-        internal static AssetBundleBrowserMain instance
+        private static UnityBridgeIntegrationMain s_instance = null;
+        internal static UnityBridgeIntegrationMain instance
         {
             get
             {
                 if (s_instance == null)
-                    s_instance = GetWindow<AssetBundleBrowserMain>();
+                    s_instance = GetWindow<UnityBridgeIntegrationMain>();
                 return s_instance;
             }
         }
@@ -96,19 +96,6 @@ namespace UnityBridgeIntegration
         {
             //determine if we are "multi source" or not...
             multiDataSource = false;
-          //  m_DataSourceList = new List<AssetBundleDataSource.ABDataSource>();
-            //foreach (var info in AssetBundleDataSource.ABDataSourceProviderUtility.CustomABDataSourceTypes)
-            //{
-            //    m_DataSourceList.AddRange(info.GetMethod("CreateDataSources").Invoke(null, null) as List<AssetBundleDataSource.ABDataSource>);
-            //}
-             
-            //if (m_DataSourceList.Count > 1)
-            //{
-            //    multiDataSource = true;
-            //    if (m_DataSourceIndex >= m_DataSourceList.Count)
-            //        m_DataSourceIndex = 0;
-            //    AssetBundleModel.Model.DataSource = m_DataSourceList[m_DataSourceIndex];
-            //}
         }
         private void OnDisable()
         {
@@ -211,39 +198,10 @@ namespace UnityBridgeIntegration
                     {
                         GenericMenu menu = new GenericMenu();
 
-                        //for (int index = 0; index < m_DataSourceList.Count; index++)
-                        //{
-                        //    var ds = m_DataSourceList[index];
-                        //    if (ds == null)
-                        //        continue;
-
-                        //    if (index > 0)
-                        //        menu.AddSeparator("");
-                             
-                        //    var counter = index;
-                        //    menu.AddItem(new GUIContent(string.Format("{0} ({1})", ds.Name, ds.ProviderName)), false,
-                        //        () =>
-                        //        {
-                        //            //m_DataSourceIndex = counter;
-                        //            //var thisDataSource = ds;
-                        //            //AssetBundleModel.Model.DataSource = thisDataSource;
-                        //            //m_ManageTab.ForceReloadData();
-                        //        }
-                        //    );
-
-                        //}
-
                         menu.ShowAsContext();
                     }
 
                     GUILayout.FlexibleSpace();
-                    //if (AssetBundleModel.Model.DataSource.IsReadOnly())
-                    //{
-                    //    GUIStyle tbLabel = new GUIStyle(EditorStyles.toolbar);
-                    //    tbLabel.alignment = TextAnchor.MiddleRight;
-
-                    //    GUILayout.Label("Read Only", tbLabel);
-                    //}
                 }
 
                 GUILayout.EndHorizontal();

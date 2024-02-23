@@ -30,11 +30,10 @@ namespace UnityBridgeIntegration
 
             csharpNamespaceInserter = new CsharpNamespaceInserter(
                 //"/Users/msudhanshu/Tech/Comp/onegame/frontend/onegame-mobile/unity/unity-bridge/Assets/Unity-bridge-integration-tool/Tests/Dummyfile.cs",
-                "Assets/Unity-bridge-integration-tool/Tests",
-               
+                "Assets",
                 "MyHelixGame");
             scriptMoverForBridgeIntegration = new ScriptMoverForBridgeIntegration(
-                "Assets/Unity-bridge-integration-tool/Tests",
+                "Assets",
                 "MyHelixGame");
 
         }
@@ -134,7 +133,7 @@ namespace UnityBridgeIntegration
             {
                 Debug.LogError("Export Tags Need to Implement.");
                  string[] projectContent = new string[] {"ProjectSettings/TagManager.asset"};
-                AssetDatabase.ExportPackage(projectContent, "UnityBridgeIntegrationTagManager.unitypackage",ExportPackageOptions.Interactive | ExportPackageOptions.Recurse |ExportPackageOptions.IncludeDependencies);
+                AssetDatabase.ExportPackage(projectContent, "UnityBridgeIntegrationTagManager_"+ gameNamespaceName + ".unitypackage",ExportPackageOptions.Interactive | ExportPackageOptions.Recurse |ExportPackageOptions.IncludeDependencies);
                  Debug.Log("Tags Exported");
             }
 
@@ -145,14 +144,15 @@ namespace UnityBridgeIntegration
 
             if (GUILayout.Button("Insert Namespace", GUILayout.MaxWidth(175f)))
             {
-                Debug.Log("Insert gameNamespaceName: " + gameNamespaceName.ToString());
-                Debug.Log("Insert m_OutputPath: " + m_UserData.m_OutputPath.ToString());
+                Debug.Log("Insert gameNamespaceName: " + gameNamespaceName);
+                Debug.Log("Insert path: " + m_UserData.m_OutputPath);
                 csharpNamespaceInserter.insertNamespaceInAllFile(m_UserData.m_OutputPath, gameNamespaceName);
             }
             if (GUILayout.Button("Move Scripts", GUILayout.MaxWidth(175f)))
             {
-                Debug.LogError("Export Tags Need to Implement.");
-                //scriptMoverForBridgeIntegration.moveAllFiles();
+                Debug.LogError("Move Scripts Need to Implement.");
+                Debug.Log("Move Scripts gameNamespaceName: " + gameNamespaceName + ". scriptPath="+ m_UserData.m_OutputPath);
+                scriptMoverForBridgeIntegration.moveAllFiles(m_UserData.m_OutputPath, gameNamespaceName);
             }
             GUILayout.EndHorizontal();
 
@@ -184,8 +184,8 @@ namespace UnityBridgeIntegration
         private void ResetPathToDefault()
         {
             m_UserData.m_UseDefaultPath = true;
-            m_UserData.m_OutputPath = "AssetBundles/";
-            m_UserData.m_OutputPath += m_UserData.m_BuildTarget.ToString();
+            m_UserData.m_OutputPath = "Assets";
+            //m_UserData.m_OutputPath += m_UserData.m_BuildTarget.ToString();
             //EditorUserBuildSettings.SetPlatformSettings(EditorUserBuildSettings.activeBuildTarget.ToString(), "AssetBundleOutputPath", m_OutputPath);
         }
 
