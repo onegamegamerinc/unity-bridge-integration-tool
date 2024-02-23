@@ -71,6 +71,7 @@ namespace UnityBridgeIntegration
 
                 var lines = File.ReadLines(filePath);
                 bool firstTime = false;
+                finalContent += "#if " + gameNamespaceName + " \n";
                 foreach (var line in lines)
                 {
 
@@ -91,7 +92,6 @@ namespace UnityBridgeIntegration
                         }
                         //Debug.Log(firstTime);
                         firstTime = true;
-                        finalContent += "#if " + gameNamespaceName + " {\n";
                         finalContent += "namespace " + gameNamespaceName + " {\n";
                         finalContent += line + "\n";
                     }
