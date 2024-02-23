@@ -84,8 +84,14 @@ namespace UnityBridgeIntegration
                     }
                     else if (!(tline.StartsWith("using ") && tline.EndsWith(";")) && !firstTime)
                     {
+                        //check if already inserted:
+                        if(tline.StartsWith("#if " + gameNamespaceName)) {
+                             Debug.Log("Insertion is already done before for : " + filePath);
+                             return;
+                        }
                         //Debug.Log(firstTime);
                         firstTime = true;
+                        finalContent += "#if " + gameNamespaceName + " {\n";
                         finalContent += "namespace " + gameNamespaceName + " {\n";
                         finalContent += line + "\n";
                     }
@@ -96,6 +102,7 @@ namespace UnityBridgeIntegration
 
                 }
                 finalContent += "\n}";
+                finalContent += "\n#endif";
 
                 File.WriteAllText(filePath, finalContent);
 

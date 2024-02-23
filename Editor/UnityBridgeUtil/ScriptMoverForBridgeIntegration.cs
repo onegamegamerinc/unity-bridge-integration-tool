@@ -36,7 +36,7 @@ namespace UnityBridgeIntegration
         public void moveAllFiles(string path, string gameNamespaceName)
         {
             Debug.Log("moveAllFiless in folder path : " + path);
-            Debug.Log("Please Move the listed file manualy by dragging.");
+            Debug.Log("******* Move files to Assets/unity-games-scripts/" +gameNamespaceName+ " manualy by dragging *******");
             try
             {
                 //DirectoryInfo dir = new DirectoryInfo(path); //"Assets/Resources/Vehicles"
@@ -66,10 +66,12 @@ namespace UnityBridgeIntegration
         public void moveFile(string path, string filePath, string gameNamespaceName)
         {
             string filePathNameOnly = filePath.Replace(path + "/", "");
-            Debug.Log("Move from " + filePath + " to " + "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
+            //Debug.Log("Move from " + filePath + " to " + "Assets/GameScript/" + gameNamespaceName + "/" + filePathNameOnly);
+             Debug.Log(": " + filePath);
+
 
             var filePathOnly = Path.GetDirectoryName(filePathNameOnly);// filePathNameOnly.Split("/");
-            Directory.CreateDirectory("Assets/GameScript/" + gameNamespaceName + "/" + filePathOnly);
+            Directory.CreateDirectory("Assets/unity-games-scripts/" + gameNamespaceName + "/" + filePathOnly);
 
 
 
