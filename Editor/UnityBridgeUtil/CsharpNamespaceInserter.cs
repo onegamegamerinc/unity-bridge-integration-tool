@@ -86,7 +86,7 @@ namespace UnityBridgeIntegration
                     {
                         //check if already inserted:
                         if(tline.StartsWith("#if " + gameNamespaceName)) {
-                             Debug.Log("Insertion is already done before for : " + filePath);
+                             Debug.LogWarning("Insertion is already done before for : " + filePath);
                              return;
                         }
                         //Debug.Log(firstTime);
