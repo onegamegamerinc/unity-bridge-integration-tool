@@ -50,6 +50,37 @@ namespace UnityBridgeIntegration
             }
         }
 
+        public static void Broadcast_exitGameUpdateScore(int score)
+        {
+            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
+            GameObject _bridgeGo = findUnityBridgeReieverGo();
+            if (_bridgeGo != null)
+            {
+                _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGameUpdateScore", score, SendMessageOptions.DontRequireReceiver);
+            } else
+            {
+                Debug.LogError("game object UnityBridgeManager could not be found");
+            }
+        }
+
+            
+        public static void Broadcast_exitGameUpdateScore(int score, long sessionTimeInMs)
+        {
+            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
+            GameObject _bridgeGo = findUnityBridgeReieverGo();
+            if (_bridgeGo != null)
+            {
+                object[] scoreobj = new object[2];
+                scoreobj[0] = score;
+                scoreobj[1] = sessionTimeInMs;
+
+                _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGameUpdateScore", scoreobj, SendMessageOptions.DontRequireReceiver);
+            }
+            else
+            {
+                Debug.LogError("game object UnityBridgeManager could not be found");
+            }
+        }
 
         public static void Broadcast_exitGame()
         {

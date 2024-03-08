@@ -37,7 +37,15 @@ namespace UnityBridgeIntegration
 
         public static event Action<ScoreResToUnityDto> GotScoreResponse;
         public static event Action PlayAgainAction;
+        public static event Action ExitGameRequestScoreAction;
         public static event Action<int> EnableSoundAction;
+
+
+        public static void UnityBridgeToGame_OnExitGameRequestScore()
+        {
+            Debug.Log("ExitGameRequestScoreAction: recieved ");
+            ExitGameRequestScoreAction?.Invoke();
+        }
 
         public static void UnityBridgeToGame_OnScoreUpdateResponse(string payload)
         {
@@ -57,7 +65,6 @@ namespace UnityBridgeIntegration
             Debug.Log("UnityBridgeToGame_enableSound: recieved ");
             EnableSoundAction?.Invoke(enable);
         }
-
 
     }
 
