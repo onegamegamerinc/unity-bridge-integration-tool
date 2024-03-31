@@ -22,8 +22,8 @@ namespace UnityBridgeIntegration
 
         }
       }
-     * 
-     * 
+     *
+     *
      */
 
 
@@ -41,28 +41,28 @@ namespace UnityBridgeIntegration
         public static event Action<int> EnableSoundAction;
 
 
-        public static void UnityBridgeToGame_OnExitGameRequestScore()
+        public static void OnExitGameRequestScore()
         {
-            Debug.Log("ExitGameRequestScoreAction: recieved ");
+            Debug.Log("[UnityBridgeToGameListener.OnExitGameRequestScore] recieved");
             ExitGameRequestScoreAction?.Invoke();
         }
 
-        public static void UnityBridgeToGame_OnScoreUpdateResponse(string payload)
+        public static void OnScoreUpdateResponse(string payload)
         {
-            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: recieved " + payload);
+            Debug.Log("[UnityBridgeToGameListener.OnScoreUpdateResponse] recieved payload=" + payload);
             ScoreResToUnityDto scoreResToUnityDto = ScoreResToUnityDto.ParsePayload(payload);
             GotScoreResponse?.Invoke(scoreResToUnityDto);
         }
 
-        public static void UnityBridgeToGame_playAgain()
+        public static void OnPlayAgain()
         {
-            Debug.Log("UnityBridgeToGame_playAgain: recieved ");
+            Debug.Log("[UnityBridgeToGameListener.OnPlayAgain]: recieved");
             PlayAgainAction?.Invoke();
         }
 
-        public static void UnityBridgeToGame_enableSound(int enable)
+        public static void onEnableSound(int enable)
         {
-            Debug.Log("UnityBridgeToGame_enableSound: recieved ");
+            Debug.Log("[UnityBridgeToGameListener.onEnableSound]: recieved");
             EnableSoundAction?.Invoke(enable);
         }
 
