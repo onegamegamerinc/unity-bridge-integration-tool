@@ -23,9 +23,9 @@ namespace UnityBridgeIntegration
             }
         }
 
-        public static void Broadcast_updateScore(int score, long sessionTimeInMs = 0)
+        public static void UpdateScore(int score, long sessionTimeInMs = 0)
         {
-            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_updateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
+            Debug.Log("[GameToUnityBridgeBroadcaster.UpdateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
 
             object[] scoreobj = new object[2];
             scoreobj[0] = score;
@@ -34,9 +34,9 @@ namespace UnityBridgeIntegration
             bridgeGo?.BroadcastMessage("GameToUnityBridge_updateScoreObj", scoreobj, SendMessageOptions.DontRequireReceiver);
         }
 
-        public static void Broadcast_exitGameUpdateScore(int score, long sessionTimeInMs = 0)
+        public static void ExitGameUpdateScore(int score, long sessionTimeInMs = 0)
         {
-            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_exitGameUpdateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
+            Debug.Log("[GameToUnityBridgeBroadcaster.ExitGameUpdateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
 
             object[] scoreobj = new object[2];
             scoreobj[0] = score;
@@ -45,23 +45,23 @@ namespace UnityBridgeIntegration
             bridgeGo?.BroadcastMessage("GameToUnityBridge_exitGameUpdateScore", scoreobj, SendMessageOptions.DontRequireReceiver);
         }
 
-        public static void Broadcast_exitGame()
+        public static void ExitGame()
         {
-            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_exitGame]");
+            Debug.Log("[GameToUnityBridgeBroadcaster.ExitGame]");
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_exitGame", SendMessageOptions.DontRequireReceiver);
         }
 
-        public static void Broadcast_showFullScreenAd()
+        public static void ShowFullScreenAd()
         {
-            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_showFullScreenAd]");
+            Debug.Log("[GameToUnityBridgeBroadcaster.ShowFullScreenAd]");
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_showFullScreenAd", SendMessageOptions.DontRequireReceiver);
         }
 
-        public static void Broadcast_showBannerAd(string param)
+        public static void ShowBannerAd(string param)
         {
-            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_showBannerAd]");
+            Debug.Log("[GameToUnityBridgeBroadcaster.ShowBannerAd]");
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_showBannerAd", param, SendMessageOptions.DontRequireReceiver);
         }
