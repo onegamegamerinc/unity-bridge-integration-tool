@@ -60,7 +60,7 @@ namespace UnityBridgeIntegration
             PlayAgainAction?.Invoke();
         }
 
-        public static void onEnableSound(int enable)
+        public static void OnEnableSound(int enable)
         {
             Debug.Log("[UnityBridgeToGameListener.onEnableSound]: recieved");
             EnableSoundAction?.Invoke(enable);
