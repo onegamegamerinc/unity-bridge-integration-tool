@@ -7,118 +7,63 @@ namespace UnityBridgeIntegration
 
     public class GameToUnityBridgeBroadcaster
     {
-        static GameObject bridgeGo = null;
-        private static GameObject findUnityBridgeReieverGo()
-        {
-            if (bridgeGo == null)
-            {
-                bridgeGo = GameObject.Find("UnityBridgeManager");
-                //bridgeGo = GameObject.FindWithTag("GAME_SIDE_TAG_FOR_UNITY_BRIDGE");
-            }
-            return bridgeGo;
-        }
+        static GameObject s_bridgeGo = null;
 
-        public static void Broadcast_updateScore(int score)
+        private static GameObject bridgeGo
         {
-            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
+            get
             {
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_updateScore", score, SendMessageOptions.DontRequireReceiver);
-            } else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
+                Debug.Log("[GameToUnityBridgeBroadcaster.s_bridgeGo]");
+                s_bridgeGo = GameObject.Find("UnityBridgeManager");
+                if (s_bridgeGo == null)
+                {
+                    Debug.LogError("[GameToUnityBridgeBroadcaster.s_bridgeGo] GameObject UnityBridgeManager not found");
+                }
+                return s_bridgeGo;
             }
         }
 
-            
-        public static void Broadcast_updateScore(int score, long sessionTimeInMs)
+        public static void Broadcast_updateScore(int score, long sessionTimeInMs = 0)
         {
-            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
-            {
-                object[] scoreobj = new object[2];
-                scoreobj[0] = score;
-                scoreobj[1] = sessionTimeInMs;
+            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_updateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
 
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_updateScoreObj", scoreobj, SendMessageOptions.DontRequireReceiver);
-            }
-            else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
-            }
+            object[] scoreobj = new object[2];
+            scoreobj[0] = score;
+            scoreobj[1] = sessionTimeInMs;
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_updateScoreObj", scoreobj, SendMessageOptions.DontRequireReceiver);
         }
 
-        public static void Broadcast_exitGameUpdateScore(int score)
+        public static void Broadcast_exitGameUpdateScore(int score, long sessionTimeInMs = 0)
         {
-            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
-            {
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGameUpdateScore", score, SendMessageOptions.DontRequireReceiver);
-            } else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
-            }
-        }
+            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_exitGameUpdateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
 
-            
-        public static void Broadcast_exitGameUpdateScore(int score, long sessionTimeInMs)
-        {
-            Debug.Log("UnityBridgeToGame_OnScoreUpdateResponse: " + score);
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
-            {
-                object[] scoreobj = new object[2];
-                scoreobj[0] = score;
-                scoreobj[1] = sessionTimeInMs;
+            object[] scoreobj = new object[2];
+            scoreobj[0] = score;
+            scoreobj[1] = sessionTimeInMs;
 
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGameUpdateScore", scoreobj, SendMessageOptions.DontRequireReceiver);
-            }
-            else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
-            }
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_exitGameUpdateScore", scoreobj, SendMessageOptions.DontRequireReceiver);
         }
 
         public static void Broadcast_exitGame()
         {
-            Debug.Log("Broadcast_exitGame: ");
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
-            {
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_exitGame", SendMessageOptions.DontRequireReceiver);
-            } else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
-            }
+            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_exitGame]");
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_exitGame", SendMessageOptions.DontRequireReceiver);
         }
 
         public static void Broadcast_showFullScreenAd()
         {
-            Debug.Log("Broadcast_exitGame: ");
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
-            {
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_showFullScreenAd", SendMessageOptions.DontRequireReceiver);
-            } else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
-            }
+            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_showFullScreenAd]");
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_showFullScreenAd", SendMessageOptions.DontRequireReceiver);
         }
 
         public static void Broadcast_showBannerAd(string param)
         {
-            Debug.Log("Broadcast_exitGame: ");
-            GameObject _bridgeGo = findUnityBridgeReieverGo();
-            if (_bridgeGo != null)
-            {
-                _bridgeGo.BroadcastMessage("GameToUnityBridge_showBannerAd",param, SendMessageOptions.DontRequireReceiver);
-            } else
-            {
-                Debug.LogError("game object UnityBridgeManager could not be found");
-            }
+            Debug.Log("[GameToUnityBridgeBroadcaster.Broadcast_showBannerAd]");
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_showBannerAd", param, SendMessageOptions.DontRequireReceiver);
         }
     }
 
