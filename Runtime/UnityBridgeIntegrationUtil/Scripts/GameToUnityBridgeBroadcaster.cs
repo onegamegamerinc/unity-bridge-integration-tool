@@ -65,6 +65,13 @@ namespace UnityBridgeIntegration
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_showBannerAd", param, SendMessageOptions.DontRequireReceiver);
         }
+        
+        public static void UpdateSound(int soundState)
+        {
+            Debug.Log("[GameToUnityBridgeBroadcaster.UpdateSound]"+ soundState);
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_updateSound", soundState, SendMessageOptions.DontRequireReceiver);
+        }
     }
 
 }
