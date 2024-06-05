@@ -72,6 +72,13 @@ namespace UnityBridgeIntegration
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_updateSound", soundState, SendMessageOptions.DontRequireReceiver);
         }
+
+        public static void PauseGame()
+        {
+            Debug.Log("[GameToUnityBridgeBroadcaster.PauseGame]");
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_pauseGame", SendMessageOptions.DontRequireReceiver);
+        }
     }
 
 }
