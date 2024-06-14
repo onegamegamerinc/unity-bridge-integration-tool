@@ -41,6 +41,7 @@ namespace UnityBridgeIntegration
         public static event Action PauseAction;
         public static event Action ResumeAction;
         public static event Action<int> EnableSoundAction;
+        public static event Action<string> GetGameDataAction;
 
 
         public static void OnExitGameRequestScore()
@@ -66,6 +67,12 @@ namespace UnityBridgeIntegration
         {
             Debug.Log("[UnityBridgeToGameListener.onEnableSound]: recieved");
             EnableSoundAction?.Invoke(enable);
+        }
+
+        public static void OnGetGameData(string gamedata)
+        {
+            Debug.Log("[UnityBridgeToGameListener.OnGetGameData]: recieved");
+            GetGameDataAction?.Invoke(gamedata);
         }
 
         public static void OnPauseGame()

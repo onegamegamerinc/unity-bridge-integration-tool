@@ -79,6 +79,13 @@ namespace UnityBridgeIntegration
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_pauseGame", SendMessageOptions.DontRequireReceiver);
         }
+
+        public static void SendGameData(string gamedata)
+        {
+            Debug.Log("[GameToUnityBridgeBroadcaster.SendGameData]" + gamedata);
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_SendData", gamedata,SendMessageOptions.DontRequireReceiver);
+        }
     }
 
 }

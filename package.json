@@ -1,7 +1,7 @@
 {
 	"name": "onegame.unity.bridge.integration",
 	"displayName": "Unity Bridge Integration",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"unity": "2022.3",
 	"description": "The Unity Bridge Integration tool makes it possible to make any game ready to be exported as assetbundle which can be used by onegame unity-bridge unity project, which eventually gets integration in flutter..",
 	"keywords": [
