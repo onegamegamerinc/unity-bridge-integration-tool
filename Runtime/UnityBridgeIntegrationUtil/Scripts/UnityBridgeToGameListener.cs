@@ -38,6 +38,7 @@ namespace UnityBridgeIntegration
         public static event Action<ScoreResToUnityDto> GotScoreResponse;
         public static event Action PlayAgainAction;
         public static event Action ExitGameRequestScoreAction;
+        public static event Action ExitGameAction;
         public static event Action PauseAction;
         public static event Action ResumeAction;
         public static event Action<int> EnableSoundAction;
@@ -48,6 +49,12 @@ namespace UnityBridgeIntegration
         {
             Debug.Log("[UnityBridgeToGameListener.OnExitGameRequestScore] recieved");
             ExitGameRequestScoreAction?.Invoke();
+        }
+
+        public static void OnExitGame()
+        {
+            Debug.Log("[UnityBridgeToGameListener.OnExitGame] recieved");
+            ExitGameAction?.Invoke();
         }
 
         public static void OnScoreUpdateResponse(string payload)
