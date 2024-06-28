@@ -84,7 +84,7 @@ namespace UnityBridgeIntegration
         {
             Debug.Log("[GameToUnityBridgeBroadcaster.SendGameData]" + gamedata);
 
-            bridgeGo?.BroadcastMessage("GameToUnityBridge_SendGameData", gamedata,SendMessageOptions.DontRequireReceiver);
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_sendGameData", gamedata,SendMessageOptions.DontRequireReceiver);
         }
     }
 
