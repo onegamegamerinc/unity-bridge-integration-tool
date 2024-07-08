@@ -86,6 +86,13 @@ namespace UnityBridgeIntegration
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_sendGameData", gamedata,SendMessageOptions.DontRequireReceiver);
         }
+
+        public static void SendPlayerRankPosition(string Rankposition)
+        {
+            Debug.Log("[GameToUnityBridgeBroadcaster.SendPlayerRankPosition]" + Rankposition);
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_sendPlayerRankPosition", Rankposition, SendMessageOptions.DontRequireReceiver);
+        }
     }
 
 }
