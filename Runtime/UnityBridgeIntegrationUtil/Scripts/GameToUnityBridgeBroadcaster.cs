@@ -34,6 +34,17 @@ namespace UnityBridgeIntegration
             bridgeGo?.BroadcastMessage("GameToUnityBridge_updateScoreObj", scoreobj, SendMessageOptions.DontRequireReceiver);
         }
 
+        public static void UpdateRank(string rankInfo, long sessionTimeInMs = 0)
+        {
+            Debug.Log("[GameToUnityBridgeBroadcaster.UpdateRank] rankInfo=" + rankInfo + ", sessionTimeInMs=" + sessionTimeInMs);
+
+            object[] rankobj = new object[2];
+            rankobj[0] = rankInfo;
+            rankobj[1] = sessionTimeInMs;
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_updateRankObj", rankobj, SendMessageOptions.DontRequireReceiver);
+        }
+
         public static void ExitGameUpdateScore(int score, long sessionTimeInMs = 0)
         {
             Debug.Log("[GameToUnityBridgeBroadcaster.ExitGameUpdateScore] score=" + score + ", sessionTimeInMs=" + sessionTimeInMs);
