@@ -43,6 +43,7 @@ namespace UnityBridgeIntegration
         public static event Action ResumeAction;
         public static event Action<int> EnableSoundAction;
         public static event Action<string> GetGameDataAction;
+        public static event Action<string> GetUserName;
 
 
         public static void OnExitGameRequestScore()
@@ -80,6 +81,12 @@ namespace UnityBridgeIntegration
         {
             Debug.Log("[UnityBridgeToGameListener.OnGetGameData]: recieved");
             GetGameDataAction?.Invoke(gamedata);
+        }
+
+	public static void OnGetUserName(string name)
+        {
+            Debug.Log("[UnityBridgeToGameListener.OnGetUserName]: recieved");
+            GetUserName? Invoke(name);
         }
 
         public static void OnPauseGame()
