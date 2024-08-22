@@ -86,7 +86,7 @@ namespace UnityBridgeIntegration
 	public static void OnGetUserName(string name)
         {
             Debug.Log("[UnityBridgeToGameListener.OnGetUserName]: recieved");
-            GetUserName? Invoke(name);
+            GetUserName?.Invoke(name);
         }
 
         public static void OnPauseGame()
