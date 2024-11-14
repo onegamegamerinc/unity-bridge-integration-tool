@@ -104,6 +104,13 @@ namespace UnityBridgeIntegration
 
             bridgeGo?.BroadcastMessage("GameToUnityBridge_sendPlayerRankPosition", Rankposition, SendMessageOptions.DontRequireReceiver);
         }
+
+        public static void ShowAd()
+        {
+            Debug.Log("[GameToUnityBridgeBroadcaster.ShowAd]");
+
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_showAd", SendMessageOptions.DontRequireReceiver);
+        }
     }
 
 }
