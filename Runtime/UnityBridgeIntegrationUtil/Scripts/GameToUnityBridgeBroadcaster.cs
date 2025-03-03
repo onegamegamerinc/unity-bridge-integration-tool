@@ -112,11 +112,11 @@ namespace UnityBridgeIntegration
             bridgeGo?.BroadcastMessage("GameToUnityBridge_showAd", SendMessageOptions.DontRequireReceiver);
         }
 
-        public static void UpdateAllRank()
+        public static void UpdateAllRank(string allRanks)
         {
             Debug.Log("[GameToUnityBridgeBroadcaster.UpdateAllRank]");
 
-            bridgeGo?.BroadcastMessage("GameToUnityBridge_updateAllRank", SendMessageOptions.DontRequireReceiver);
+            bridgeGo?.BroadcastMessage("GameToUnityBridge_updateAllRank", allRanks, SendMessageOptions.DontRequireReceiver);
         }
     }
 
